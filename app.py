@@ -1,12 +1,30 @@
 import flet as ft
 import string
 import random
+from time import sleep
 
 
 def main(page: ft.Page):
     page.bgcolor = ft.colors.BROWN
-    avaliable_words = ['peratur', 'uva', 'maçã' 'melão', 'limão', ]
-    choice = random.choice(avaliable_words)
+    avaliable_words = ['pera', 'uva', 'maçã' 'melão', 'limão', ]
+    choice = random.choice(avaliable_words).upper()
+
+    def validate_choice(e):
+        if e.control.content.value in choice:
+            for pos,  letter in enumerate(choice):
+                if e.control.content.value == letter:
+                    word.controls[pos] = letter_to_guess(letter=letter)
+                    word.update()
+        else:
+            victim.data = victim.data + 1
+            if victim.data < 7:
+                victim.src = f'images/hangman_{victim.data}.png'
+                victim.update()
+            else:
+                victim.src = f'images/hangman_{victim.data}.png'
+                page.update()
+                sleep(0.5)
+                page.open(dlg)
 
     def letter_to_guess(letter):
         return ft.Container(
@@ -23,6 +41,10 @@ def main(page: ft.Page):
                 weight=ft.FontWeight.BOLD
             )
         )
+    dlg = ft.AlertDialog(
+        title=ft.Text("Você perdeu! :("),
+    )
+
     victim = ft.Image(
         data=0,
         src='images/hangman_0.png',
@@ -66,7 +88,9 @@ def main(page: ft.Page):
                         begin=ft.alignment.top_center,
                         end=ft.alignment.bottom_center,
                         colors=[ft.colors.AMBER, ft.colors.DEEP_ORANGE]
-                    )
+                    ),
+                    on_click=validate_choice
+
                 ) for letter in string.ascii_uppercase
             ]
         )
