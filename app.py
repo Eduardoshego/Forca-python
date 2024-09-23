@@ -59,6 +59,8 @@ def main(page: ft.Page):
         col={'xs':12, 'lg':6},
         padding = ft.padding.all(50),
         content =  ft.Column(
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment .CENTER,
             controls=[
                 victim,
                 word
