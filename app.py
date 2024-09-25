@@ -25,6 +25,9 @@ def main(page: ft.Page):
                 page.update()
                 sleep(0.5)
                 alertas(f'Você perdeu! A palavra era: {choice}')
+        e.control.disabled = True
+        e.control.gradient = ft.LinearGradient(colors=[ft.colors.GREY])
+        e.control.update()
 
     def letter_to_guess(letter):
         return ft.Container(
