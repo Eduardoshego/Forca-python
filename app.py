@@ -24,7 +24,7 @@ def main(page: ft.Page):
                 victim.src = f'images/hangman_{victim.data}.png'
                 page.update()
                 sleep(0.5)
-                page.open(dlg)
+                alertas(f'Você perdeu! A palavra era: {choice}')
 
     def letter_to_guess(letter):
         return ft.Container(
@@ -41,9 +41,11 @@ def main(page: ft.Page):
                 weight=ft.FontWeight.BOLD
             )
         )
-    dlg = ft.AlertDialog(
-        title=ft.Text("Você perdeu! :("),
-    )
+
+    def alertas(msg):
+        page.dialog = ft.AlertDialog(
+            title=ft.Text(value=f'Game Over\n {msg}!', text_align=ft.TextAlign.CENTER), open=True
+        )
 
     victim = ft.Image(
         data=0,
