@@ -6,7 +6,8 @@ from time import sleep
 
 def main(page: ft.Page):
     page.bgcolor = ft.colors.BROWN
-    avaliable_words = ['pera', 'uva', 'maçã' 'melão', 'limão', ]
+    avaliable_words = ['processador', 'memoria ram',
+                       'placa-mae', 'monitor', 'limão', ]
     choice = random.choice(avaliable_words).upper()
 
     def validate_choice(e):
@@ -22,9 +23,8 @@ def main(page: ft.Page):
                 victim.update()
             else:
                 victim.src = f'images/hangman_{victim.data}.png'
-                page.update()
-                sleep(0.5)
                 alertas(f'Você perdeu! A palavra era: {choice}')
+                page.update()
         e.control.disabled = True
         e.control.gradient = ft.LinearGradient(colors=[ft.colors.GREY])
         e.control.update()
